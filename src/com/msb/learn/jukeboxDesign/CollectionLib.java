@@ -148,8 +148,7 @@ class JukeBox implements Observer{
     void removeSong(Song song) {
     }
 
-
-    @Override
+//it works even without writing override :)
     public void notifyObserver(Song song) {
         queue.remove();
     }
