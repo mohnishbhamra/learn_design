@@ -109,12 +109,14 @@ class Album extends Entity implements CollectionLib {
 
 }
 
-class Song extends Entity {
+class Song extends Entity  {
     Boolean isBeingPlayed = false;
 
-    Boolean playSong() {
+    Boolean playSong(Observer observer) {
+        observer.notifyObserver(this);
         return null;
     }
+
 }
 
 class Astronout extends Entity {
@@ -126,8 +128,10 @@ class Astronout extends Entity {
         priority++;
     }
 }
-
-class JukeBox {
+interface Observer {
+    void notifyObserver(Song observer);
+}
+class JukeBox implements Observer{
     PriorityQueue<Pair<Song, Astronout>> queue = new PriorityQueue<>(new Comparator<Pair<Song, Astronout>>() {
         @Override
         public int compare(Pair<Song, Astronout> o1, Pair<Song, Astronout> o2) {
@@ -145,7 +149,10 @@ class JukeBox {
     }
 
 
-
+    @Override
+    public void notifyObserver(Song song) {
+        queue.remove();
+    }
 }
 
  class System{
